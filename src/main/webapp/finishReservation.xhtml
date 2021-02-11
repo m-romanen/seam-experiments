@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+	<h:head>
+		<title>Reservation finished</title>
+	</h:head>
+
+	<h:body>
+		<h:form id="finishReservationForm">
+			<ui:include src="headerPanel.xhtml" />
+			<h:outputText value="Thank you for reserve place to film #{selectedFilm.name} | " />
+			<h:commandLink action="#{reservationProcess.reserveMore}" value="Reserve more" />
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Start date: " />
+				<h:outputText value="#{finishedReservation.seance.start_date}">
+						<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
+				</h:outputText>
+				<h:outputLabel value="Hall: " />
+				<h:outputText value="#{finishedReservation.seance.hall.name}" />
+				<h:outputLabel value="Place: " />
+				<h:outputText value="#{selectedRow.number}" />
+				<h:outputLabel value="Place: " />
+				<h:outputText value="#{finishedReservation.place.number}" />
+			</h:panelGrid>
+		</h:form>
+	</h:body>
+
+
+</ui:composition>

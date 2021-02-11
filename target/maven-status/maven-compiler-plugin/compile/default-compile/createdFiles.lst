@@ -1,0 +1,14 @@
+action\ReservationProcessAction.class
+domain\Reservation.class
+domain\Film.class
+domain\Seance.class
+action\FilmSelection.class
+action\ReservationProcess.class
+action\FilmSelectionAction.class
+domain\Hall.class
+domain\Place.class
+domain\User.class
+domain\Row.class
+utils\UsefulUtils.class
+action\Login.class
+action\LoginAction.class

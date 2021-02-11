@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:s="http://jboss.org/schema/seam/taglib"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+<title>Hello</title>
+</head>
+
+<body>
+	<f:view>
+		<h:form id="selectFilmsForm">
+			<h:messages id="messages" />
+			<h:outputLabel value="Hello #{sessionUser.name}!" />
+			<h:dataTable value="#{films}"></h:dataTable>
+			<ui:repeat var="#{films}" value="item">
+				<h:outputText value="#{item.name}" />
+			</ui:repeat>
+		</h:form>
+	</f:view>
+</body>
+
+
+</html>
