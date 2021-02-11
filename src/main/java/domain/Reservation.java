@@ -32,6 +32,15 @@ public class Reservation {
 	@JoinColumn(name = "user_id")
 	private User user;
 	
+	public Reservation() {
+	}
+	
+	public Reservation (User user, Seance seance, Place place) {
+		this.user = user;
+		this.seance = seance;
+		this.place = place;
+	}
+	
 	public Integer getId() {
 		return id;
 	}

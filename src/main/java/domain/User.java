@@ -3,7 +3,6 @@ package domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
 
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Name;
@@ -15,6 +14,7 @@ import org.jboss.seam.annotations.Role;
 @Role(name = "sessionUser", scope = ScopeType.SESSION)
 public class User {
 
+	@Id
 	private Integer id;
 
 	private String login;
@@ -22,11 +22,7 @@ public class User {
 	private String name;
 
 	private String password;
-
-	public User() {
-	}
-
-	@Id
+	
 	public Integer getId() {
 		return id;
 	}
@@ -35,7 +31,6 @@ public class User {
 		this.id = id;
 	}
 
-	@NotNull
 	public String getLogin() {
 		return login;
 	}
@@ -44,7 +39,6 @@ public class User {
 		this.login = login;
 	}
 
-	@NotNull
 	public String getPassword() {
 		return password;
 	}

@@ -3,3 +3,5 @@
 .tern-project
 .project
 .classpath
+/.metadata
+/.settings

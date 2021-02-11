@@ -1,1 +1,1 @@
-Experimental project with using Jboss Seam 2.3.1.Final, JSF, Hibernate
+Experimental project with using Jboss Seam 2.3.1.Final, JSF, Hibernate, Bootstrap

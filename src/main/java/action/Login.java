@@ -5,10 +5,10 @@ import javax.ejb.Local;
 @Local
 public interface Login {
 	
-	public String login();
+	String login();
 	
-	public String logout();
+	String logout();
 	
-	public void destroy();
+	void destroy();
 
 }

@@ -1,11 +1,8 @@
-package action;
+package action.impl;
 
 import java.util.List;
 
 import javax.ejb.Remove;
-import javax.persistence.EntityManager;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 
 import org.jboss.seam.ScopeType;
 import org.jboss.seam.annotations.Factory;
@@ -17,14 +14,16 @@ import org.jboss.seam.annotations.datamodel.DataModel;
 import org.jboss.seam.annotations.datamodel.DataModelSelection;
 import org.jboss.seam.contexts.Contexts;
 
+import action.FilmSelection;
 import domain.Film;
+import service.ReservationService;
 
 @Name("filmSelection")
 @Scope(ScopeType.SESSION)
 public class FilmSelectionAction implements FilmSelection {
 
 	@In
-	private EntityManager entityManager;
+	private ReservationService reservationService;
 
 	@DataModel
 	private List<Film> films;
@@ -35,10 +34,7 @@ public class FilmSelectionAction implements FilmSelection {
 
 	@Factory
 	public void getFilms() {
-		CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-		CriteriaQuery<Film> query = criteriaBuilder.createQuery(Film.class);
-		query.select(query.from(Film.class));
-		films = entityManager.createQuery(query).getResultList();
+		films = reservationService.findAllFilms();
 	}
 	
 	public String showSeances() {

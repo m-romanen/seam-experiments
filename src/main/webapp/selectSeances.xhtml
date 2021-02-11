@@ -7,46 +7,60 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
 
-<h:head>
-<title>Select your seance</title>
-</h:head>
+	<h:head>
+		<ui:include src="resources.xhtml" />
+		<title>Select your seance</title>
+	</h:head>
 
-<h:body>
+	<h:body>
 		<h:form id="selectSeancesForm">
-			<ui:include src="headerPanel.xhtml" />
-			<div>
-				<h:outputText value="You choosed film: #{selectedFilm.name} | Duration: #{selectedFilm.duration} mins. " />
-				<h:commandLink action="#{filmSelection.chooseAnotherFilm}" value="Choose another film" />
+			<ui:include src="navbar.xhtml" />
+			<h2 class="m-2 text-center">
+				<h:outputText value="#{selectedFilm.name}"/>
+			</h2>
+			<div class="text-center">
+				<h:commandButton action="#{filmSelection.chooseAnotherFilm}" value="Choose another film" styleClass="btn btn-light m-2" />
 			</div>
 			<ui:repeat value="#{seances}" var="seanceItem">
-				<h:panelGrid columns="2" id="id#{seanceItem.id}"
-					style="display:inline-block;width:33%;float:left">
-					<h:outputLabel value="Hall: " />
-					<h:outputText value="#{seanceItem.hall.name}" />
-					<h:outputLabel value="Start date: " />
-					<h:outputText value="#{seanceItem.start_date}">
-						<f:convertDateTime pattern="dd.MM.yyyy HH:mm" />
-					</h:outputText>
-					<h:outputLabel value="Choose row: " />
-					<h:selectOneMenu value="#{seanceItem.selectedRowId}">
-						<f:selectItem itemValue="#{null}" itemLabel="--select--" />
-						<f:selectItems value="#{seanceItem.hall.rows}" var="rowItem" itemValue="#{rowItem.id}" itemLabel="#{rowItem.number}"/>
-						<f:ajax event="change" render="@form" execute="@form" listener="#{reservationProcess.onRowSelect()}"/>
-					</h:selectOneMenu>
-					<h:outputLabel value="Choose place: " />
-					<h:selectOneMenu value="#{seanceItem.selectedPlaceId}" >
-						<f:selectItem itemValue="#{null}" itemLabel="--select--" />
-						<f:selectItems value="#{seanceItem.filteredPlaces}" var="placeItem" itemValue="#{placeItem.id}" itemLabel="#{placeItem.number}"/>
-						<f:ajax event="change" render="@form" execute="@form"/>
-					</h:selectOneMenu>
-					<h:outputLabel value="Price: " />
-					<h:outputText value="#{seanceItem.price}" />
-					<h:commandButton action="#{reservationProcess.reserve}" disabled="#{seanceItem.selectedPlaceId == null}"
-						value="Reserve" />
-				</h:panelGrid>
+				<div class="card m-2" style="width: 28rem; height: 28rem; float: left">
+					<div class="card-body">
+						<div>
+							<h:outputLabel value="Hall:" styleClass="fw-bold pe-2 my-2" />
+							<h:outputText value="#{seanceItem.hall.name}" />
+						</div>
+						<div>
+							<h:outputLabel value="Start date:" styleClass="fw-bold pe-2 my-2"/>
+							<h:outputText value="#{seanceItem.startDate}">
+								<f:converter converterId="customDateTimeConverter" />
+							</h:outputText>
+						</div>
+						<div>
+							<h:outputLabel value="Row:" styleClass="fw-bold pe-2 my-2"/>
+							<h:selectOneMenu value="#{seanceItem.selectedRowId}" styleClass="form-select">
+								<f:selectItem itemValue="#{null}" itemLabel="--select--" />
+								<f:selectItems value="#{seanceItem.hall.rows}" var="rowItem" itemValue="#{rowItem.id}" itemLabel="#{rowItem.number}" />
+								<f:ajax event="change" render="@form" execute="@form" listener="#{reservationProcess.onRowSelect()}" />
+							</h:selectOneMenu>
+						</div>
+						<div>
+							<h:outputLabel value="Place:" styleClass="fw-bold pe-2 my-2"/>
+							<h:selectOneMenu value="#{seanceItem.selectedPlaceId}" styleClass="form-select">
+								<f:selectItem itemValue="#{null}" itemLabel="--select--" />
+								<f:selectItems value="#{seanceItem.filteredPlaces}" var="placeItem" itemValue="#{placeItem.id}" itemLabel="#{placeItem.number}" />
+								<f:ajax event="change" render="@form" execute="@form" />
+							</h:selectOneMenu>
+						</div>
+						<div>
+							<h:outputLabel value="Price:" styleClass="fw-bold pe-2 my-2"/>
+							<h:outputText value="#{seanceItem.price} UAH" />
+						</div>
+						
+						<h:commandButton action="#{reservationProcess.reserve}" disabled="#{seanceItem.selectedPlaceId == null}" value="Reserve" styleClass="btn btn-warning"/>					
+					</div>
+				</div>
+
 			</ui:repeat>
 		</h:form>
-</h:body>
-
+	</h:body>
 
 </ui:composition>

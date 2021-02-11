@@ -3,6 +3,7 @@ package domain;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -17,27 +18,28 @@ import org.jboss.seam.annotations.Name;
 @Table(name = "seance")
 @Name("seance")
 public class Seance {
-	
+
 	@Id
 	private Integer id;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "hall_id")
 	private Hall hall;
-	
-	private Date start_date;
-	
+
+	@Column(name = "start_date")
+	private Date startDate;
+
 	private Integer price;
-	
+
 	@Transient
 	private Integer selectedRowId;
-	
+
 	@Transient
 	private Integer selectedPlaceId;
-	
+
 	@Transient
 	private List<Place> filteredPlaces;
-	
+
 	public Integer getId() {
 		return id;
 	}
@@ -62,14 +64,6 @@ public class Seance {
 		this.price = price;
 	}
 
-	public Date getStart_date() {
-		return start_date;
-	}
-
-	public void setStart_date(Date start_date) {
-		this.start_date = start_date;
-	}
-
 	public Integer getSelectedRowId() {
 		return selectedRowId;
 	}
@@ -92,6 +86,14 @@ public class Seance {
 
 	public void setFilteredPlaces(List<Place> filteredPlaces) {
 		this.filteredPlaces = filteredPlaces;
+	}
+
+	public Date getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(Date startDdate) {
+		this.startDate = startDdate;
 	}
 
 }
