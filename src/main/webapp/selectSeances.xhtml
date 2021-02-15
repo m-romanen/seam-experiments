@@ -22,43 +22,39 @@
 				<h:commandButton action="#{filmSelection.chooseAnotherFilm}" value="Choose another film" styleClass="btn btn-light m-2" />
 			</div>
 			<ui:repeat value="#{seances}" var="seanceItem">
-				<div class="card m-2" style="width: 28rem; height: 28rem; float: left">
-					<div class="card-body">
-						<div>
-							<h:outputLabel value="Hall:" styleClass="fw-bold pe-2 my-2" />
-							<h:outputText value="#{seanceItem.hall.name}" />
-						</div>
-						<div>
-							<h:outputLabel value="Start date:" styleClass="fw-bold pe-2 my-2"/>
-							<h:outputText value="#{seanceItem.startDate}">
-								<f:converter converterId="customDateTimeConverter" />
-							</h:outputText>
-						</div>
-						<div>
-							<h:outputLabel value="Row:" styleClass="fw-bold pe-2 my-2"/>
-							<h:selectOneMenu value="#{seanceItem.selectedRowId}" styleClass="form-select">
-								<f:selectItem itemValue="#{null}" itemLabel="--select--" />
-								<f:selectItems value="#{seanceItem.hall.rows}" var="rowItem" itemValue="#{rowItem.id}" itemLabel="#{rowItem.number}" />
-								<f:ajax event="change" render="@form" execute="@form" listener="#{reservationProcess.onRowSelect()}" />
-							</h:selectOneMenu>
-						</div>
-						<div>
-							<h:outputLabel value="Place:" styleClass="fw-bold pe-2 my-2"/>
-							<h:selectOneMenu value="#{seanceItem.selectedPlaceId}" styleClass="form-select">
-								<f:selectItem itemValue="#{null}" itemLabel="--select--" />
-								<f:selectItems value="#{seanceItem.filteredPlaces}" var="placeItem" itemValue="#{placeItem.id}" itemLabel="#{placeItem.number}" />
-								<f:ajax event="change" render="@form" execute="@form" />
-							</h:selectOneMenu>
-						</div>
-						<div>
-							<h:outputLabel value="Price:" styleClass="fw-bold pe-2 my-2"/>
-							<h:outputText value="#{seanceItem.price} UAH" />
-						</div>
-						
-						<h:commandButton action="#{reservationProcess.reserve}" disabled="#{seanceItem.selectedPlaceId == null}" value="Reserve" styleClass="btn btn-warning"/>					
+				<div class="m-2 container-sm border border-3 border-light rounded-3" style="width:28rem; min-height:28rem; float:left">
+					<div>
+						<h:outputLabel value="Hall:" styleClass="fw-bold pe-2 my-2" />
+						<h:outputText value="#{seanceItem.hall.name}" />
 					</div>
-				</div>
-
+					<div>
+						<h:outputLabel value="Start date:" styleClass="fw-bold pe-2 my-2"/>
+						<h:outputText value="#{seanceItem.startDate}">
+							<f:converter converterId="customDateTimeConverter" />
+						</h:outputText>
+					</div>
+					<div>
+						<h:outputLabel value="Row:" styleClass="fw-bold pe-2 my-2"/>
+						<h:selectOneMenu value="#{seanceItem.selectedRowId}" styleClass="form-select">
+							<f:selectItem itemValue="#{null}" itemLabel="--select--" />
+							<f:selectItems value="#{seanceItem.hall.rows}" var="rowItem" itemValue="#{rowItem.id}" itemLabel="#{rowItem.number}" />
+							<f:ajax event="change" render="@form" execute="@form" listener="#{reservationProcess.onRowSelect()}" />
+						</h:selectOneMenu>
+					</div>
+					<div>
+						<h:outputLabel value="Place:" styleClass="fw-bold pe-2 my-2"/>
+						<h:selectOneMenu value="#{seanceItem.selectedPlaceId}" styleClass="form-select">
+							<f:selectItem itemValue="#{null}" itemLabel="--select--" />
+							<f:selectItems value="#{seanceItem.filteredPlaces}" var="placeItem" itemValue="#{placeItem.id}" itemLabel="#{placeItem.number}" />
+							<f:ajax event="change" render="@form" execute="@form" />
+						</h:selectOneMenu>
+					</div>
+					<div>
+						<h:outputLabel value="Price:" styleClass="fw-bold pe-2 my-2"/>
+						<h:outputText value="#{seanceItem.price} UAH" />
+					</div>
+					<h:commandButton action="#{reservationProcess.reserve}" disabled="#{seanceItem.selectedPlaceId == null}" value="Reserve" styleClass="btn btn-warning"/>					
+					</div>
 			</ui:repeat>
 		</h:form>
 	</h:body>

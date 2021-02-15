@@ -17,16 +17,14 @@
 			<h:form id="selectFilmsForm">
 				<ui:include src="navbar.xhtml" />
 				<ui:repeat value="#{films}" var="item">
-					<div class="card m-2" style="width:38rem; height:38rem; float:left">
-						<div class="card-body">
-							<h2 class="card-title">#{item.name}</h2>
-							<div>
-								<h:outputLabel value="Duration:" styleClass="fst-italic"/>
-								<h:outputText value=" #{item.duration} mins."/>
-							</div>
-							<h:commandButton action="#{filmSelection.showSeances}" value="Show seances"  styleClass="btn btn-warning my-2"/>
-							<h:outputText value="#{item.description}" styleClass="card-text" style="display:block"/>
+					<div class="m-2 container-sm border border-3 border-light rounded-3" style="max-width:36rem !important; min-height:36rem; float:left">
+						<h2>#{item.name}</h2>
+						<div>
+							<h:outputLabel value="Duration:" styleClass="fst-italic"/>
+							<h:outputText value=" #{item.duration} mins."/>
 						</div>
+						<h:commandButton action="#{filmSelection.showSeances}" value="Show seances"  styleClass="btn btn-warning my-2"/>
+						<h:outputText value="#{item.description}" styleClass="card-text" style="display:block"/>
 					</div>
 				</ui:repeat>
 			</h:form>
