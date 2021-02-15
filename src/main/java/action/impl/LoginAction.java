@@ -20,7 +20,7 @@ public class LoginAction implements Login {
 	@In
 	private LoginService loginService;
 
-	@In(required = false)
+	@In
 	User sessionUser;
 
 	public String login() {
